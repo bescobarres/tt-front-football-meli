@@ -23,7 +23,7 @@ const sendData = async (startinglinequantity: number) => {
       'http://double-insight-412703.uw.r.appspot.com/team?day=' + formatDate() + '&startingLineUpQuantity=' + startinglinequantity
     );
     setData(response.data);
-  } catch (error) {
+  } catch (error: any) {
     alert(error.response.data.message);
   }
 };
