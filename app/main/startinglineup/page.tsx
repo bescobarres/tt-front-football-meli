@@ -23,7 +23,6 @@ const sendData = async (startinglinequantity: number) => {
       process.env.NEXT_PUBLIC_BACKEND_URL + 'team?day=' + formatDate() + '&startingLineUpQuantity=' + startinglinequantity,
       {
         headers: {
-            authorization: ' xxxxxxxxxx' ,
             'Content-Type': 'application/json'
          }
       }
