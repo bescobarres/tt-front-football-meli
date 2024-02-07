@@ -20,11 +20,17 @@ export default function StartingLineUpTeam() {
 const sendData = async (startinglinequantity: number) => {
   try {
     const response = await axios.get(
-      process.env.NEXT_PUBLIC_BACKEND_URL + '/team?day=' + formatDate() + '&startingLineUpQuantity=' + startinglinequantity
+      process.env.NEXT_PUBLIC_BACKEND_URL + 'team?day=' + formatDate() + '&startingLineUpQuantity=' + startinglinequantity,
+      {
+        headers: {
+            authorization: ' xxxxxxxxxx' ,
+            'Content-Type': 'application/json'
+         }
+      }
     );
     setData(response.data);
   } catch (error: any) {
-    alert(error.response.data.message);
+    alert(error.response);
   }
 };
 

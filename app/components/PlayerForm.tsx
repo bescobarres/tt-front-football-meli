@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from 'react';
 import axios from 'axios';
 
@@ -21,35 +23,25 @@ const initialPlayer: Player = {
     date: Date.now().toString(),
 };
 
-const initialPlayers: Player[] = [];
 
 interface PlayerFormProps {
     onSendData: (players: Player[]) => void;
 }
 
-var formularioActive = false;
 
 const apiUrlTraining = process.env.NEXT_PUBLIC_BACKEND_URL + 'training';
 
 
 const sendData = async (players: Player[]) => {
-
-    const config = {
-        method: 'post',
-        url: apiUrlTraining,
-        data: players
-      };
-
+    console.log('entrando');
     try {
-      const response = await axios.post(apiUrlTraining, players, config);
-      console.log(response.data);
-      alert(response.data);
+        const response = await axios.post(apiUrlTraining, players);
     } catch (error) {
-      console.error(error);
-      alert(error);
+        console.error(error);
+        alert(error);
     }
 
-  };
+};
 
 
 
@@ -74,33 +66,33 @@ const PlayerForm = ({ onSendData }: PlayerFormProps) => {
     const handleDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = event.target;
         setPlayer({ ...player, [name]: formatDate(value) });
-        
+
     };
 
     function formatDate(value: string): string {
         const currentDate = new Date(value);
-      
+
         const day = currentDate.getDate();
-        const month = currentDate.getMonth() + 1; 
+        const month = currentDate.getMonth() + 1;
         const year = currentDate.getFullYear();
-      
+
         const formattedDay = day < 10 ? `0${day}` : day.toString();
         const formattedMonth = month < 10 ? `0${month}` : month.toString();
-      
+
         const formattedDate = `${year}-${formattedMonth}-${formattedDay}`;
-      
+
         return formattedDate;
-      }
+    }
 
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         const playerLocal = Object.values(player);
-        if(playerLocal.some((val) => val == null || val == '' )) return alert("Llene los campos del formulario");
+        if (playerLocal.some((val) => val == null || val == '')) return alert("Llene los campos del formulario");
 
         event.preventDefault();
         setPlayer(initialPlayer);
         sendData([player]);
-      };
+    };
 
 
     return (
@@ -175,7 +167,7 @@ const PlayerForm = ({ onSendData }: PlayerFormProps) => {
                 onChange={handleDateChange}
                 className="px-3 py-2 placeholder-gray-400 border rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
             />
-            <button 
+            <button
                 type="submit"
                 className="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded mt-4"
             >
