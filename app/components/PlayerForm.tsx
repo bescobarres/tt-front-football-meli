@@ -29,7 +29,7 @@ interface PlayerFormProps {
 
 var formularioActive = false;
 
-const apiUrl = 'https://double-insight-412703.uw.r.appspot.com/training';
+const apiUrlTraining = process.env.BACKEND_URL + 'training';
 
 const headers = {
     'Content-Type': 'application/json',
@@ -39,13 +39,13 @@ const sendData = async (players: Player[]) => {
 
     const config = {
         method: 'post',
-        url: apiUrl,
+        url: apiUrlTraining,
         headers: headers,
         data: players
       };
 
     try {
-      const response = await axios.post(apiUrl, players, config);
+      const response = await axios.post(apiUrlTraining, players, config);
       console.log(response.data);
       alert(response.data);
     } catch (error) {
