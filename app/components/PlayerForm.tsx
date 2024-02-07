@@ -29,18 +29,14 @@ interface PlayerFormProps {
 
 var formularioActive = false;
 
-const apiUrlTraining = process.env.BACKEND_URL + 'training';
+const apiUrlTraining = process.env.NEXT_PUBLIC_BACKEND_URL + 'training';
 
-const headers = {
-    'Content-Type': 'application/json',
-  };
 
 const sendData = async (players: Player[]) => {
 
     const config = {
         method: 'post',
         url: apiUrlTraining,
-        headers: headers,
         data: players
       };
 
